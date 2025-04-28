@@ -3,7 +3,7 @@ public func isAdult(_ age: UInt) -> Bool {
 }
 
 public func hello() {
-  if Bool.randam() {
+  if Bool.random() {
     print("Hello!")
   } else {
     print("World!")
