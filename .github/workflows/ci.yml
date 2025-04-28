@@ -1,0 +1,54 @@
+name: ci
+permissions:
+  pull-requests: write
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+jobs:
+  test:
+    runs-on: ubuntu-24.04-arm
+    container: swiftlang/swift:nightly-6.1-noble
+    outputs:
+      SUMMARY: ${{ steps.summary.outputs.SUMMARY }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: swift --version
+      - run: swift build --build-tests --disable-xctest --enable-code-coverage
+      - run: swift test --skip-build --disable-xctest --enable-code-coverage --parallel
+      - name: llvm-cov report
+        id: report
+        run: |
+          echo 'OUTPUT<<EOF' >> "$GITHUB_OUTPUT"
+          llvm-cov report .build/debug/SampleLibraryPackageTests.xctest --instr-profile=.build/debug/codecov/default.profdata --ignore-filename-regex=".build|Tests|TokenizerMacros" --show-region-summary=false --show-branch-summary=false >> "$GITHUB_OUTPUT"
+          echo 'EOF' >> "$GITHUB_OUTPUT"
+      - name: Create summary text
+        id: summary
+        env:
+          REPORT_OUTPUT: ${{ steps.report.outputs.OUTPUT }}
+        run: |
+          echo 'SUMMARY<<EOF' >> "$GITHUB_OUTPUT"
+          echo '## Coverage Summary' >> "$GITHUB_OUTPUT"
+          echo >> "$GITHUB_OUTPUT"
+          echo "$(date)" >> "$GITHUB_OUTPUT"
+          echo >> "$GITHUB_OUTPUT"
+          echo '```' >> "$GITHUB_OUTPUT"
+          echo "$REPORT_OUTPUT" >> "$GITHUB_OUTPUT"
+          echo '```' >> "$GITHUB_OUTPUT"
+          echo 'EOF' >> "$GITHUB_OUTPUT"
+      - name: Create a job summary
+        env:
+          SUMMARY: ${{ steps.summary.outputs.SUMMARY }}
+        run: echo "$SUMMARY" >> "$GITHUB_STEP_SUMMARY"
+  comment-test:
+    needs: test
+    runs-on: ubuntu-24.04-arm
+    continue-on-error: true
+    steps:
+      - name: Comment PR
+        if: ${{ github.ref != 'refs/heads/main' }}
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          message: ${{ needs.test.outputs.SUMMARY }}
+          comment-tag: coverage
