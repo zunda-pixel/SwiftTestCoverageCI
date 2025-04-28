@@ -49,4 +49,3 @@ jobs:
         uses: thollander/actions-comment-pull-request@v3
         with:
           message: ${{ needs.test.outputs.SUMMARY }}
-          comment-tag: coverage
