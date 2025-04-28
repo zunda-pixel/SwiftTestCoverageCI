@@ -1,3 +1,3 @@
 public func isAdult(_ age: UInt) -> Bool {
-  return age > 20
+  return age >= 20
 }
