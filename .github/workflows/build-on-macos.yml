@@ -17,7 +17,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - run: xcode-select --switch  ${{ matrix.xcode }}}
+      - run: xcode-select --switch  ${{ matrix.xcode }}
       - run: sw_vers
       - run: uname -a
       - run: swift --version
