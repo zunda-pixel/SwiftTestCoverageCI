@@ -10,18 +10,16 @@ jobs:
           - macos-15
           - macos-15-arm64
         xcode:
-          - /Applications/Xcode_16.app
+          - /Applications/Xcode_16.0.app
           - /Applications/Xcode_16.1.app
           - /Applications/Xcode_16.2.app
           - /Applications/Xcode_16.3.app
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - run: sudo xcode-select --switch  ${{ matrix.xcode }}
+      - run: sudo xcode-select --switch ${{ matrix.xcode }}
       - run: sw_vers
       - run: uname -a
-      - run: swift --version
-      - run: xcrun --version
       - run: xcodebuild -version
       - run: xcodebuild -version -sdk
-      - run: xcode-select -h
+      - run: swift --version
