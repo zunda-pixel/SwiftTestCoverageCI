@@ -6,6 +6,7 @@ jobs:
   test:
     name: Test on ${{matrix.xcode}} / ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os:
           - macos-14
