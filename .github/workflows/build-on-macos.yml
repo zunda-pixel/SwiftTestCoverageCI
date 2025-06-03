@@ -4,20 +4,21 @@ on: pull_request
 
 jobs:
   test:
+    name: Test on ${{matrix.xcode}} / ${{ matrix.os }}
     strategy:
       matrix:
         os:
           - macos-15
           - macos-15-arm64
         xcode:
-          - /Applications/Xcode_16.0.app
-          - /Applications/Xcode_16.1.app
-          - /Applications/Xcode_16.2.app
-          - /Applications/Xcode_16.3.app
+          - Xcode_16.0.app
+          - Xcode_16.1.app
+          - Xcode_16.2.app
+          - Xcode_16.3.app
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - run: sudo xcode-select --switch ${{ matrix.xcode }}
+      - run: sudo xcode-select --switch /Applications/${{ matrix.xcode }}
       - run: sw_vers
       - run: uname -a
       - run: xcodebuild -version
