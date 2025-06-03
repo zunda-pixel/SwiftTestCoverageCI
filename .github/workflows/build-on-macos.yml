@@ -8,3 +8,5 @@ jobs:
       - run: swift --version
       - run: xcrun --version
       - run: xcodebuild -version
+      - run: xcodebuild -version -sdk
+      - run: xcode-select -h
