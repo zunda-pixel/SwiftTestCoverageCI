@@ -7,4 +7,4 @@ jobs:
       - uses: actions/checkout@v4
       - run: swift --version
       - run: xcrun --version
-      - run: xcrun instruments -s
+      - run: xcodebuild --version
