@@ -14,7 +14,7 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(url: "https://github.com/kean/Nuke.git", from: "12.7.0")
+    .package(url: "https://github.com/PureSwift/Bluetooth.git", from: "7.1.0")
   ],
   targets: [
     .target(
