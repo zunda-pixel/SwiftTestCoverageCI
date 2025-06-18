@@ -10,6 +10,6 @@ jobs:
         id: generate-diff
         with:
           platform: "iOS"
-          new: "develop~https://github.com/Adyen/adyen-ios.git"
-          old: "5.12.0~https://github.com/Adyen/adyen-ios.git"
+          new: "test-publi-api-diff~https://github.com/Adyen/adyen-ios.git"
+          old: "main~https://github.com/Adyen/adyen-ios.git"
       - run: echo  "${{ steps.generate-diff.outputs.message }}"
