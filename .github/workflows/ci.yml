@@ -4,7 +4,7 @@ on: pull_request
 
 jobs:
   public-api-diff:
-    runs-on: ubuntu-24.04-arm
+    runs-on: macos-15
     steps:
       - uses: zunda-pixel/adyen-swift-public-api-diff@fix-output
         id: generate-diff
