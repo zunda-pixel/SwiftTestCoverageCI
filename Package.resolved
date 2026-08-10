@@ -1,13 +1,13 @@
 {
-  "originHash" : "9283e4d107b0d572d24c53a1f336fe3a1d17b30076d6cc768e35e909c5493709",
+  "originHash" : "8fbbcbfbe372350bbdced1e86aac9fc69170eb8df53d4574a16155b9310eb0ea",
   "pins" : [
     {
       "identity" : "bluetooth",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/PureSwift/Bluetooth.git",
       "state" : {
-        "revision" : "69abc3104c13f20453c5e0744a4f4a0450c6e410",
-        "version" : "7.1.0"
+        "revision" : "034a7e3066abbd2d86fc45934d25fd32ba712ce9",
+        "version" : "8.1.0"
       }
     },
     {
